@@ -132,6 +132,7 @@ select
 カーディナリティが高いテーブルからアクセスする基本どおりのクエリプラン。
 ```
 
+--実行したSQL
 select 
 	'pf tableP high cardinality ', 
 	p.num_col1, 
@@ -140,7 +141,7 @@ select
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
 where n.str_col3='1'
-  and p.str_col4='1' ;
+  and p.str_col4='1' ; -- < テーブルPでカーディナリティが高い項目を条件指定
 
 ```
 
@@ -155,6 +156,7 @@ where n.str_col3='1'
 下記のとおりテーブルNが駆動表に変わった。
 やはり、カーディナリティが高いテーブルからアクセスする基本どおりのクエリプラン。
 ```
+--実行したSQL
 select 
 	'pf tableN high cardinality ', 
 	p.num_col1, 
@@ -163,7 +165,7 @@ select
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
 where p.str_col3='1' 
-  and n.str_col4='1' ;
+  and n.str_col4='1' ;-- < テーブルNでカーディナリティが高い項目を条件指定
 
 ```
 
