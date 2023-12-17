@@ -204,7 +204,8 @@ update `ml_dataset.bigdata_for_ev` set str_col5 = '10' where str_col5  > '500';
 update `ml_dataset.bigdata_for_ev_nopart` set str_col5 = '10' where str_col5  > '500';
 ```
 下記はプロファイル機能でみたカーディナリティ。
-str_col4よりもstr_col5の方がカーディナリティは10倍高い。しかし10が異常値で、もしwhere句で指定されると50％がヒットしていまう。
+str_col4よりもstr_col5の方がカーディナリティは10倍高い。
+しかし10が異常値で、もしwhere句で指定されると50％がヒットしてしまう。
 
 ![プロファイル機能 異常値のカーディナリティ](./img/プロファイル機能_異常値カーディナリティ.jpg)
 
