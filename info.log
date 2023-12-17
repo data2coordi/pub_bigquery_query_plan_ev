@@ -8,3 +8,32 @@ select
 +----------------+--------------+--------------+
 |      100003248 |            1 |     99999999 |
 +----------------+--------------+--------------+
+Error in query string: Error processing job 'pro-
+ml-406906:bqjob_r4994154bf29e10c1_0000018c7712868d_1': Syntax error: Unexpected
+keyword AND at [60:3]
+select 
+	count(str_col3) str_col3_count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
+	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev`; -- at [2:1]
++----------------+--------------+--------------+----------------+--------------+--------------+
+| str_col3_count | str_col3_min | str_col3_max | str_col4_count | str_col4_min | str_col4_max |
++----------------+--------------+--------------+----------------+--------------+--------------+
+|      100003248 | 0            | 9            |      100003248 | 0            | 99           |
++----------------+--------------+--------------+----------------+--------------+--------------+
+select 
+	count(str_col3) str_col3_count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
+	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev_nopart`; -- at [2:1]
++----------------+--------------+--------------+----------------+--------------+--------------+
+| str_col3_count | str_col3_min | str_col3_max | str_col4_count | str_col4_min | str_col4_max |
++----------------+--------------+--------------+----------------+--------------+--------------+
+|      100003248 | 0            | 9            |      100003248 | 0            | 99           |
++----------------+--------------+--------------+----------------+--------------+--------------+

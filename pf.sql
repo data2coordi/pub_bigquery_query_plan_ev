@@ -1,4 +1,12 @@
 
+select 
+	count(str_col3) str_col3_count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
+	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev_nopart`;
 
 return ;
 --Get information 
@@ -23,7 +31,7 @@ from `ml_dataset.bigdata_for_ev`
 where num_col1 = 12091143;
 
 select 
-	'pf not hit: between min and max' comment, 
+	'pf not hit: out of min and max' comment, 
 	num_col1,
 	partid, 
 	clusterdid,
@@ -31,17 +39,45 @@ select
 from `ml_dataset.bigdata_for_ev` 
 where num_col1 = 100000001;
 -----------------------------------
---select min
---select 
---	'pf not hit: out of min and max', 
---	p.partid, 
---	p.clusterdid, 
---	p.num_col1, 
---	CURRENT_TIMESTAMP() t  
---from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
---where p.num_col1=100000000 ; 
 
+select 
+	count(str_col3) str_col3_count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
+	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev`;
 
+select 
+	count(str_col3) str_col3_count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
+	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev_nopart`;
+
+select 
+	'pf tableN high cardinality ', 
+	p.num_col1, 
+	n.num_col1, 
+	CURRENT_TIMESTAMP() t  
+from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
+   on p.clusterdid = n.clusterdid
+where p.str_col3='1' 
+  and n.str_col4='1' -- < table n high cardinality; 
+
+select 
+	'pf tableP high cardinality ', 
+	p.num_col1, 
+	n.num_col1, 
+	CURRENT_TIMESTAMP() t  
+from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
+   on p.clusterdid = n.clusterdid
+where n.str_col3='1'
+  and p.str_col4='1' -- < table p high cardinality; 
+-----------------------------------
 select 
 	'pf part', 
 	partid, 
