@@ -1,9 +1,16 @@
 
 select 
-	count(str_col3) str_col3_count, 
+	count(*) count, 
 	min(str_col3) str_col3_min, 
 	max(str_col3) str_col3_max,
-	count(str_col4) str_col4_count, 
+	min(str_col4) str_col4_min, 
+	max(str_col4) str_col4_max
+	from `ml_dataset.bigdata_for_ev`;
+
+select 
+	count(*) count, 
+	min(str_col3) str_col3_min, 
+	max(str_col3) str_col3_max,
 	min(str_col4) str_col4_min, 
 	max(str_col4) str_col4_max
 	from `ml_dataset.bigdata_for_ev_nopart`;
@@ -41,19 +48,17 @@ where num_col1 = 100000001;
 -----------------------------------
 
 select 
-	count(str_col3) str_col3_count, 
+	count(*) count, 
 	min(str_col3) str_col3_min, 
 	max(str_col3) str_col3_max,
-	count(str_col4) str_col4_count, 
 	min(str_col4) str_col4_min, 
 	max(str_col4) str_col4_max
 	from `ml_dataset.bigdata_for_ev`;
 
 select 
-	count(str_col3) str_col3_count, 
+	count(*) count, 
 	min(str_col3) str_col3_min, 
 	max(str_col3) str_col3_max,
-	count(str_col4) str_col4_count, 
 	min(str_col4) str_col4_min, 
 	max(str_col4) str_col4_max
 	from `ml_dataset.bigdata_for_ev_nopart`;
@@ -66,7 +71,8 @@ select
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
 where p.str_col3='1' 
-  and n.str_col4='1' -- < table n high cardinality; 
+  and n.str_col4='1' ;
+-- < table n high cardinality; 
 
 select 
 	'pf tableP high cardinality ', 
@@ -76,7 +82,8 @@ select
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
 where n.str_col3='1'
-  and p.str_col4='1' -- < table p high cardinality; 
+  and p.str_col4='1' ;
+-- < table p high cardinality; 
 -----------------------------------
 select 
 	'pf part', 
