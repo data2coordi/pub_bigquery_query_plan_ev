@@ -29,7 +29,8 @@ bq query --use_legacy_sql=false <  pf.sql
 
 [対象のSQL:pf.sql](./pf.sql)
 
-上記のコマンドで対象のSQL実行を実行している。
+上記のコマンドで対象のSQL実行を実行する。
+クエリプランを取得する場合は、Bigqueryのコンソールから上記SQLを実行する。
 
 
 
