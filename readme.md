@@ -17,6 +17,7 @@ Bigqueryはどの程度、統計情報を考慮してクエリプランを決め
 
 ## テストデータ
 以下のリポジトリの方法で作成した1億件のテーブルで性能を検証する。
+
 [Bigqueryで大量データ生成](https://github.com/data2coordi/pub_bigquery_generate_data)
 
 ## 性能確認手順
