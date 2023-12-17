@@ -1,0 +1,10 @@
+select 
+	count(num_col1) num_col1_count, 
+	min(num_col1) num_col1_min, 
+	max(num_col1) num_col1_max
+	from `ml_dataset.bigdata_for_ev`; -- at [2:1]
++----------------+--------------+--------------+
+| num_col1_count | num_col1_min | num_col1_max |
++----------------+--------------+--------------+
+|      100003248 |            1 |     99999999 |
++----------------+--------------+--------------+
