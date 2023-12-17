@@ -38,3 +38,39 @@ select
 +-----------+--------------+--------------+--------------+--------------+
 | 100003248 | 0            | 9            | 0            | 99           |
 +-----------+--------------+--------------+--------------+--------------+
+select 
+	count(*) count, 
+	min(str_col5) str_col5_min, 
+	max(str_col5) str_col5_max
+	from `ml_dataset.bigdata_for_ev`; -- at [2:1]
++-----------+--------------+--------------+
+|   count   | str_col5_min | str_col5_max |
++-----------+--------------+--------------+
+| 100003248 | 0            | 500          |
++-----------+--------------+--------------+
+select 
+	count(*) count, 
+	min(str_col5) str_col5_min, 
+	max(str_col5) str_col5_max
+	from `ml_dataset.bigdata_for_ev_nopart`; -- at [8:1]
++-----------+--------------+--------------+
+|   count   | str_col5_min | str_col5_max |
++-----------+--------------+--------------+
+| 100003248 | 0            | 500          |
++-----------+--------------+--------------+
+select 
+	count(*) count, 
+	from `ml_dataset.bigdata_for_ev` where str_col5='10'; -- at [2:1]
++----------+
+|  count   |
++----------+
+| 55298535 |
++----------+
+select 
+	count(*) count, 
+	from `ml_dataset.bigdata_for_ev_nopart` where str_col5='10'; -- at [6:1]
++----------+
+|  count   |
++----------+
+| 55298535 |
++----------+

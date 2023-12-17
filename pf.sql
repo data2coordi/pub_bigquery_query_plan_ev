@@ -1,19 +1,11 @@
 
 select 
 	count(*) count, 
-	min(str_col3) str_col3_min, 
-	max(str_col3) str_col3_max,
-	min(str_col4) str_col4_min, 
-	max(str_col4) str_col4_max
-	from `ml_dataset.bigdata_for_ev`;
+	from `ml_dataset.bigdata_for_ev` where str_col5='10';
 
 select 
 	count(*) count, 
-	min(str_col3) str_col3_min, 
-	max(str_col3) str_col3_max,
-	min(str_col4) str_col4_min, 
-	max(str_col4) str_col4_max
-	from `ml_dataset.bigdata_for_ev_nopart`;
+	from `ml_dataset.bigdata_for_ev_nopart` where str_col5='10';
 
 return ;
 --Get information 
@@ -72,7 +64,7 @@ from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart`
    on p.clusterdid = n.clusterdid
 where p.str_col3='1' 
   and n.str_col4='1' ;
--- < table n high cardinality; 
+--  table n high cardinality; 
 
 select 
 	'pf tableP high cardinality ', 
@@ -83,96 +75,53 @@ from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart`
    on p.clusterdid = n.clusterdid
 where n.str_col3='1'
   and p.str_col4='1' ;
--- < table p high cardinality; 
+--  table p high cardinality; 
 -----------------------------------
+
+update `ml_dataset.bigdata_for_ev` set str_col5 = '10' where str_col5  > '500';
+update `ml_dataset.bigdata_for_ev_nopart` set str_col5 = '10' where str_col5  > '500';
+
 select 
-	'pf part', 
-	partid, 
-	clusterdid,
+	count(*) count, 
+	min(str_col5) str_col5_min, 
+	max(str_col5) str_col5_max
+	from `ml_dataset.bigdata_for_ev`;
+
+select 
+	count(*) count, 
+	min(str_col5) str_col5_min, 
+	max(str_col5) str_col5_max
+	from `ml_dataset.bigdata_for_ev_nopart`;
+
+select 
+	count(*) count, 
+	from `ml_dataset.bigdata_for_ev` where str_col5='10';
+
+select 
+	count(*) count, 
+	from `ml_dataset.bigdata_for_ev_no_part` where str_col5='10';
+
+
+select 
+	'pf tableP high cardinality ', 
+	p.num_col1, 
+	n.num_col1, 
 	CURRENT_TIMESTAMP() t  
-from `ml_dataset.bigdata_for_ev` 
-where num_col1=12091139 
-and   partid = 10 ; 
+from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
+   on p.clusterdid = n.clusterdid
+where n.str_col4='11'
+  and p.str_col5='110' ;
 
 
 select 
-	'pf part+cluster', 
-	partid, 
-	clusterdid,
-	CURRENT_TIMESTAMP() t 
-from `ml_dataset.bigdata_for_ev`
-where num_col1=12091139 
-and   partid = 10
-and   clusterdid=9700146 ; 
-
-
---Advanced
-------------------------
-------------------------
-------------------------
--- cluster min vs max
--- part 10 clusterdid min:9500000 max:10499999 
-select 
-    'pf part+cluster min', 
-	partid, 
-	clusterdid, 
-	num_col1, 
-	CURRENT_TIMESTAMP() t 
-from 
-`ml_dataset.bigdata_for_ev`
-where partid = 10 
-and   clusterdid=9500000 ; 
-
-select 
-    'pf part+cluster middle', 
-	partid, 
-	clusterdid, 
-	num_col1, 
-	CURRENT_TIMESTAMP() t 
-from 
-`ml_dataset.bigdata_for_ev`
-where partid = 10 
-and   clusterdid=10000000 ; 
-
-
-
-select 
-    'pf part+cluster max', 
-	partid, 
-	clusterdid, 
-	num_col1, 
-	CURRENT_TIMESTAMP() t 
-from 
-`ml_dataset.bigdata_for_ev`
-where partid = 10 
-and   clusterdid=10499999 ; 
-
-
-------------------------
-
--- seq  vs randum
--- seqid:9500000 num_col1:18500113
-select 
-    'pf seqid only', 
-	partid, 
-	clusterdid, 
-	seqid, 
-	CURRENT_TIMESTAMP() t 
-from 
-`ml_dataset.bigdata_for_ev`
-where seqid = 9500000; 
-
-select 
-    'pf randum colum only', 
-	partid, 
-	clusterdid, 
-	num_col1,
-	CURRENT_TIMESTAMP() t 
-from 
-`ml_dataset.bigdata_for_ev`
-where num_col1 = 18500113;
-
-------------------------
+	'pf tableP high cardinality ', 
+	p.num_col1, 
+	n.num_col1, 
+	CURRENT_TIMESTAMP() t  
+from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
+   on p.clusterdid = n.clusterdid
+where n.str_col4='11'
+  and p.str_col5='10' ;
 
 
 
