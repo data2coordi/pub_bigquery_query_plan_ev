@@ -131,15 +131,16 @@ select
 下記のとおりテーブルPが駆動表となっている。
 カーディナリティが高いテーブルからアクセスする基本どおりのクエリプラン。
 ```
+
 select 
-	'pf tableN high cardinality ', 
+	'pf tableP high cardinality ', 
 	p.num_col1, 
 	n.num_col1, 
 	CURRENT_TIMESTAMP() t  
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
-where p.str_col3='1' 
-  and n.str_col4='1' ;
+where n.str_col3='1'
+  and p.str_col4='1' ;
 
 ```
 
@@ -155,18 +156,17 @@ where p.str_col3='1'
 やはり、カーディナリティが高いテーブルからアクセスする基本どおりのクエリプラン。
 ```
 select 
-	'pf tableP high cardinality ', 
+	'pf tableN high cardinality ', 
 	p.num_col1, 
 	n.num_col1, 
 	CURRENT_TIMESTAMP() t  
 from `ml_dataset.bigdata_for_ev` p inner join `ml_dataset.bigdata_for_ev_nopart` n
    on p.clusterdid = n.clusterdid
-where n.str_col3='1'
-  and p.str_col4='1' ;
+where p.str_col3='1' 
+  and n.str_col4='1' ;
 
 ```
 
-フルスキャンで全データをREADしている。この条件句はヒットしないのでSQLの結果は0件。
 
 ![クエリプラン](./img/テーブルN_高カーディナリティ.jpg)
 
